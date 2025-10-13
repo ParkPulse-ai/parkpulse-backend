@@ -1,0 +1,32 @@
+{
+	"contracts": {
+		"CommunityVoting": {
+			"source": "cadence/contracts/CommunityVoting.cdc",
+			"aliases": {
+				"testing": "0000000000000007"
+			}
+		}
+	},
+	"networks": {
+		"emulator": "127.0.0.1:3569",
+		"mainnet": "access.mainnet.nodes.onflow.org:9000",
+		"testing": "127.0.0.1:3569",
+		"testnet": "access.devnet.nodes.onflow.org:9000"
+	},
+	"accounts": {
+		"parkpulse": {
+			"address": "d63bdc807b56f6a5",
+			"key": {
+				"type": "file",
+				"location": "./parkpulse.pkey"
+			}
+		}
+	},
+	"deployments": {
+		"testnet": {
+			"parkpulse": [
+				"CommunityVoting"
+			]
+		}
+	}
+}
