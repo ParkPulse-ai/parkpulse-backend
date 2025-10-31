@@ -165,6 +165,24 @@ access(all) contract CommunityVoting {
                 newStatus: statusString
             )
         }
+
+        access(all) fun forceCloseProposal(proposalId: UInt64, newStatus: ProposalStatus) {
+            pre {
+                CommunityVoting.proposals[proposalId] != nil: "Proposal does not exist"
+                CommunityVoting.proposals[proposalId]!.status == ProposalStatus.Active: "Proposal is not active"
+            }
+
+            CommunityVoting.proposals[proposalId]?.updateStatus(newStatus: newStatus)
+
+            var statusString = "Declined"
+            if newStatus == ProposalStatus.Accepted {
+                statusString = "Accepted"
+            }
+            emit ProposalStatusUpdated(
+                proposalId: proposalId,
+                newStatus: statusString
+            )
+        }
     }
 
     // Public functions

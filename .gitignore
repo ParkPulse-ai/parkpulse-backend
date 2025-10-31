@@ -6,3 +6,4 @@ parkpulse.pkey
 venv
 __pycache__
 parks.geojson
+.DS_Store
