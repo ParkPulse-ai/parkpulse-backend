@@ -1,242 +1,314 @@
-# ParkPulse.ai Backend - Flow Blockchain
+# ParkPulse.ai
 
-Complete guide to deploy and run the ParkPulse.ai backend with Flow blockchain integration.
+**A decentralized community-driven platform for Urban City Planning on Flow Blockchain**
 
-## Quick Start (3 Steps)
+![Flow Blockchain](https://img.shields.io/badge/Built%20on-Flow%20Blockchain-00EF8B?style=for-the-badge&logo=flow)
+![Network](https://img.shields.io/badge/Network-Testnet-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-### 1. Setup Flow Wallet
-```bash
-python setup_flow_wallet.py
+---
+
+## 🚀 Deployed on Flow Blockchain Testnet
+
+### Contract Details
+
+| Contract Name | Contract Address | Explorer Link |
+|--------------|------------------|---------------|
+| **CommunityVoting** | `0xd63bdc807b56f6a5` | [View on FlowScan](https://testnet.flowscan.io/contract/A.d63bdc807b56f6a5.CommunityVoting) |
+
+**Network:** Flow Testnet
+**Contract Address:** `0xd63bdc807b56f6a5`
+**View on Explorer:** https://testnet.flowscan.io/contract/A.d63bdc807b56f6a5.CommunityVoting
+
+### Contract Capabilities
+- Create park protection proposals with environmental data
+- Cast votes (yes/no) on active proposals
+- Track voting results with demographic impact analysis
+- Automatic proposal status management
+- Event emission for transparency
+
+---
+
+## 🌊 Why Flow Blockchain?
+
+ParkPulse is built on **Flow Blockchain (Testnet)** for several compelling reasons:
+
+### 1. **Resource-Oriented Programming with Cadence**
+Flow's Cadence language provides unique safety guarantees perfect for voting systems:
+- **No reentrancy attacks** - Built-in protection against common smart contract vulnerabilities
+- **Static typing** - Catches errors at compile time, critical for governance contracts
+- **Resource safety** - Prevents double-voting and ensures vote integrity
+
+### 2. **User Experience First**
+- **Human-readable transactions** - Voters can see exactly what they're signing
+- **Low transaction costs** - Makes community voting accessible to everyone
+- **Fast finality** - Quick vote confirmations without waiting
+
+### 3. **Scalability**
+- **Multi-node architecture** - Separates consensus, execution, and verification
+- **No gas wars** - Predictable costs for community proposals
+- **Future-proof** - Can scale as the platform grows to multiple cities
+
+### 4. **Developer Experience**
+- **Excellent tooling** - Flow CLI, emulator, and comprehensive documentation
+- **Python & JavaScript SDKs** - Easy integration with web applications
+- **Active community** - Strong support and growing ecosystem
+
+### 5. **Environmental Mission Alignment**
+- **Energy efficient** - Proof-of-Stake consensus aligns with environmental values
+- **Sustainable infrastructure** - Lower carbon footprint than alternatives
+
+---
+
+## 📖 Overview
+
+**ParkPulse.ai** is a decentralized platform that empowers communities to protect public parks through transparent, blockchain-based voting. When a park faces threats like commercial development or removal, ParkPulse enables citizens to create proposals, analyze environmental impact, and vote on protective measures.
+
+The platform combines:
+- **AI-powered environmental analysis** (NDVI vegetation indices, PM2.5 air quality)
+- **Demographic impact assessment** (affected populations)
+- **Decentralized governance** via Flow blockchain smart contracts
+- **Transparent voting** with immutable on-chain records
+
+### Key Use Cases
+- Protect parks from commercial development
+- Community-driven conservation decisions
+- Evidence-based environmental advocacy
+- Transparent democratic processes for urban planning
+
+---
+
+## Table of Contents
+- [Deployed on Flow Blockchain Testnet](#-deployed-on-flow-blockchain-testnet)
+- [Why Flow Blockchain?](#-why-flow-blockchain)
+- [Overview](#-overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Demo & Resources](#demo--resources)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Features
+
+### For Citizens
+- **Create Proposals** - Submit park protection proposals with AI-generated impact analysis
+- **Vote on Issues** - Cast votes on proposals affecting your community
+- **View Impact Data** - See environmental and demographic impact before voting
+- **Track Results** - Real-time voting results stored immutably on-chain
+
+### Environmental Analysis
+- **NDVI Analysis** - Vegetation health tracking using satellite imagery
+- **Air Quality Monitoring** - PM2.5 levels before/after park removal scenarios
+- **Impact Prediction** - AI-powered analysis of park removal consequences
+
+### Blockchain Features
+- **Decentralized Voting** - No central authority can manipulate results
+- **Immutable Records** - All votes permanently recorded on Flow blockchain
+- **Transparent Process** - Anyone can verify voting integrity
+- **Smart Contract Automation** - Automatic proposal status updates
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     ParkPulse.ai Platform                    │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                     │
+        ▼                     ▼                     ▼
+┌──────────────┐    ┌──────────────────┐    ┌─────────────┐
+│   Frontend   │    │     Backend      │    │Flow Testnet │
+│  (Next.js)   │◄───┤  (Python/FastAPI)│◄───┤  Blockchain │
+│              │    │                  │    │             │
+│ - React UI   │    │ - Flow SDK       │    │ Community   │
+│ - Flow SDK   │    │ - AI Analysis    │    │ Voting      │
+│ - Mapbox     │    │ - GEE API        │    │ Contract    │
+│ - Voting     │    │ - PostgreSQL     │    │ 0xd63b...   │
+└──────────────┘    └──────────────────┘    └─────────────┘
 ```
 
-### 2. Install Dependencies
+### Data Flow
+1. **User Action** - Citizen interacts with frontend (create proposal/vote)
+2. **Backend Processing** - AI analyzes environmental impact via Google Earth Engine
+3. **Blockchain Transaction** - Data submitted to Flow smart contract
+4. **On-Chain Storage** - Proposal/vote recorded immutably
+5. **Event Emission** - Contract emits events for transparency
+6. **Frontend Update** - UI reflects new blockchain state
+
+---
+
+## Technology Stack
+
+### Frontend (`parkpulsefe/`)
+- **Next.js 15** - React framework with server-side rendering
+- **TypeScript** - Type-safe development
+- **@onflow/react-sdk** - Flow blockchain integration
+- **Mapbox GL** - Interactive park mapping
+- **Tailwind CSS** - Modern styling
+
+### Backend (`parkpulsebe/`)
+- **Python 3.8+** - Core backend language
+- **FastAPI** - High-performance REST API
+- **Flow Python SDK** - Blockchain interaction
+- **Google Earth Engine API** - Satellite imagery analysis
+- **PostgreSQL** - Relational database
+- **Gemini AI** - Environmental impact analysis
+
+### Blockchain
+- **Flow Blockchain** - Layer 1 blockchain (Testnet)
+- **Cadence** - Resource-oriented smart contract language
+- **Flow CLI** - Development and deployment tooling
+
+---
+
+## Getting Started
+
+### Prerequisites
+- **Node.js 18+** (for frontend)
+- **Python 3.8+** (for backend)
+- **PostgreSQL** (for database)
+- **Flow CLI** ([Installation Guide](https://developers.flow.com/tools/flow-cli/install))
+
+### Quick Start
+
+#### 1. Clone Repository
 ```bash
+git clone https://github.com/yourusername/ParkPulseAi.git
+cd ParkPulseAi
+```
+
+#### 2. Setup Backend
+```bash
+cd parkpulsebe
+
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### 3. Deploy & Run
-```bash
-# Deploy contract
-python deploy_flow_contract.py
+# Setup Flow wallet (interactive)
+python setup_flow_wallet.py
+
+# Create database
+createdb cityroots
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your credentials
 
 # Start backend
 python main.py
 ```
 
-Your backend will be running at `http://localhost:4000`
+Backend runs at: `http://localhost:4000`
+
+#### 3. Setup Frontend
+```bash
+cd parkpulsefe
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Frontend runs at: `http://localhost:3000`
+
+### Detailed Setup
+
+For complete setup instructions including:
+- Flow wallet creation
+- Contract deployment
+- API key configuration
+- Troubleshooting
+
+See:
+- **Backend README**: [parkpulsebe/README.md](parkpulsebe/README.md)
+- **Contract Deployment**: [parkpulsebe/deploy_flow_contract.py](parkpulsebe/deploy_flow_contract.py)
 
 ---
 
-## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Deployment](#deployment)
-- [Running the Backend](#running-the-backend)
-- [API Endpoints](#api-endpoints)
-- [Flow CLI Usage](#flow-cli-usage)
-- [Troubleshooting](#troubleshooting)
+## Project Structure
 
----
-
-## Prerequisites
-
-### Required Software
-- **Python 3.8+**
-- **PostgreSQL** (for database)
-- **Flow CLI** - [Install Guide](https://developers.flow.com/tools/flow-cli/install)
-
-### Install Flow CLI
-
-**macOS:**
-```bash
-brew install flow-cli
 ```
-
-**Linux:**
-```bash
-sh -ci "$(curl -fsSL https://storage.googleapis.com/flow-cli/install.sh)"
-```
-
-**Windows:**
-```powershell
-iex "& { $(irm 'https://storage.googleapis.com/flow-cli/install.ps1') }"
-```
-
-Verify installation:
-```bash
-flow version
-```
-
-### Get Flow Account & Tokens
-
-1. **Generate keys:**
-   ```bash
-   flow keys generate
-   ```
-   Save the private and public keys securely.
-
-2. **Create testnet account:**
-   Visit [Flow Testnet Faucet](https://testnet-faucet.onflow.org/) with your public key to create an account and receive free testnet FLOW tokens.
-
-3. **Save your credentials:**
-   - Account address (e.g., `0x1234567890abcdef`)
-   - Private key (keep secret!)
-
----
-
-## Installation
-
-### 1. Clone & Setup
-
-```bash
-cd parkpulsebe
-pip install -r requirements.txt
-```
-
-### 2. Database Setup
-
-Create PostgreSQL database:
-```bash
-createdb cityroots
-```
-
-Configure database connection in `.env` (see Configuration section).
-
----
-
-## Configuration
-
-### Interactive Setup (Recommended)
-
-Run the setup wizard:
-```bash
-python setup_flow_wallet.py
-```
-
-This will:
-- Guide you through wallet configuration
-- Validate credentials
-- Test Flow connection
-- Create `.env` file
-
-### Manual Setup
-
-Create `.env` file:
-```bash
-cp .env.example .env
-```
-
-Edit `.env` with your credentials:
-
-```bash
-# Database Configuration
-PGHOST=localhost
-PGPORT=5432
-PGDATABASE=cityroots
-PGUSER=your_username
-PGPASSWORD=your_password
-
-# API Keys
-GEMINI_API_KEY=your_gemini_api_key
-GEE_PROJECT_ID=your_google_earth_engine_project
-
-# Server
-PORT=4000
-
-# Flow Blockchain
-FLOW_NETWORK=testnet
-FLOW_ADDRESS=0xYourFlowAddress
-FLOW_PRIVATE_KEY=your_private_key_hex
-FLOW_CONTRACT_NAME=CommunityVoting
-FLOW_CONTRACT_ADDRESS=0xYourFlowAddress
-FLOW_ACCESS_NODE=access.devnet.nodes.onflow.org:9000
-```
-
-**Important:**
-- Replace `0xYourFlowAddress` with your actual Flow address
-- Replace `your_private_key_hex` with your private key (without `0x` prefix)
-- Never commit `.env` to git
-
----
-
-## Deployment
-
-### Deploy Contract to Flow Testnet
-
-**Option 1: Python Script (Recommended)**
-```bash
-python deploy_flow_contract.py
-```
-
-The script will:
-- ✅ Validate configuration
-- ✅ Check account balance
-- ✅ Deploy CommunityVoting contract
-- ✅ Save deployment info to `cadence/flow_deployment_info.json`
-- ✅ Update `.env` automatically
-
-**Option 2: Flow CLI**
-```bash
-flow project deploy --network testnet
-```
-
-### Verify Deployment
-
-Check your contract on Flow Explorer:
-```
-https://testnet.flowdiver.io/account/0xYourAddress
-```
-
-Or use Flow CLI:
-```bash
-flow accounts get 0xYourAddress --network testnet
+ParkPulseAi/
+├── README.md                          # This file
+│
+├── parkpulsefe/                       # Frontend (Next.js)
+│   ├── src/
+│   │   ├── app/                       # Next.js app router
+│   │   ├── components/                # React components
+│   │   └── lib/                       # Utilities & Flow config
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── parkpulsebe/                       # Backend (Python)
+│   ├── cadence/                       # Flow Cadence contracts
+│   │   ├── contracts/
+│   │   │   └── CommunityVoting.cdc    # Main voting contract
+│   │   ├── transactions/              # Write operations
+│   │   │   ├── create_proposal.cdc
+│   │   │   └── vote.cdc
+│   │   └── scripts/                   # Read operations
+│   │       ├── get_all_active_proposals.cdc
+│   │       ├── get_proposal.cdc
+│   │       └── get_vote_counts.cdc
+│   │
+│   ├── main.py                        # FastAPI application
+│   ├── blockchain.py                  # Flow blockchain service
+│   ├── agent.py                       # AI analysis
+│   ├── database.py                    # PostgreSQL operations
+│   ├── deploy_flow_contract.py        # Deployment script
+│   ├── setup_flow_wallet.py           # Wallet setup wizard
+│   ├── requirements.txt               # Python dependencies
+│   ├── flow.json                      # Flow configuration
+│   ├── .env.example                   # Environment template
+│   └── README.md                      # Backend documentation
+│
+└── .gitignore
 ```
 
 ---
 
-## Running the Backend
+## Demo & Resources
 
-### Start the Server
+### Video Demo
+[Coming Soon - Link to demo video]
 
-```bash
-python main.py
-```
+### Live Demo
+[Coming Soon - Link to deployed application]
 
-The API will be available at:
-- **Main URL**: `http://localhost:4000`
-- **Docs**: `http://localhost:4000/docs`
-- **ReDoc**: `http://localhost:4000/redoc`
+### GitHub Repository
+[https://github.com/yourusername/ParkPulseAi](https://github.com/yourusername/ParkPulseAi)
 
-### Verify Backend is Running
+### Flow Resources
+- **Contract on FlowScan**: [View Contract](https://testnet.flowscan.io/contract/A.d63bdc807b56f6a5.CommunityVoting)
+- **Flow Documentation**: [https://developers.flow.com/](https://developers.flow.com/)
+- **Cadence Language**: [https://cadence-lang.org/](https://cadence-lang.org/)
 
-```bash
-# Health check
-curl http://localhost:4000/health
-
-# Contract info
-curl http://localhost:4000/api/contract-info
-
-# Get proposals
-curl http://localhost:4000/api/proposals
-```
+### API Documentation
+- **Backend API Docs**: `http://localhost:4000/docs` (when running)
+- **Interactive API**: `http://localhost:4000/redoc`
 
 ---
 
 ## API Endpoints
 
-### Core Endpoints
+### Blockchain Endpoints
 
-#### Health Check
-```bash
-GET /health
-```
-
-#### Contract Information
+#### Get Contract Information
 ```bash
 GET /api/contract-info
 ```
-Returns Flow contract details and network info.
+Returns Flow contract details and network information.
 
 #### Get All Proposals
 ```bash
@@ -248,32 +320,32 @@ Returns all active proposals from Flow blockchain.
 ```bash
 GET /api/proposals/{id}
 ```
-Returns detailed information for a proposal.
+Returns detailed proposal information including votes and impact data.
 
 ### Application Endpoints
 
-#### AI Agent Query
+#### Create Proposal with AI Analysis
+```bash
+POST /api/analyze
+Content-Type: application/json
+
+{
+  "parkId": "park_001",
+  "parkName": "Central Park",
+  "location": {
+    "lat": 40.7829,
+    "lng": -73.9654
+  }
+}
+```
+
+#### Query AI Agent
 ```bash
 POST /api/agent
 Content-Type: application/json
 
 {
   "query": "Show me parks in Manhattan"
-}
-```
-
-#### Analyze Park Removal
-```bash
-POST /api/analyze
-Content-Type: application/json
-
-{
-  "parkId": "park_123",
-  "parkName": "Central Park",
-  "location": {
-    "lat": 40.7829,
-    "lng": -73.9654
-  }
 }
 ```
 
@@ -294,301 +366,127 @@ Content-Type: application/json
 
 ---
 
-## Flow CLI Usage
+## Smart Contract Functions
 
-### Query Blockchain (Scripts)
+### Transactions (Write Operations)
 
-**Get all active proposals:**
-```bash
-flow scripts execute cadence/scripts/get_all_active_proposals.cdc --network testnet
+#### Create Proposal
+```cadence
+createProposal(
+    parkName: String,
+    parkId: String,
+    description: String,
+    endDate: UFix64,
+    environmentalData: EnvironmentalData,
+    demographics: Demographics,
+    creator: Address
+)
 ```
 
-**Get specific proposal:**
-```bash
-flow scripts execute cadence/scripts/get_proposal.cdc \
-  --arg UInt64:1 \
-  --network testnet
+#### Vote on Proposal
+```cadence
+vote(
+    proposalId: UInt64,
+    vote: Bool,
+    voter: Address
+)
 ```
 
-**Get vote counts:**
-```bash
-flow scripts execute cadence/scripts/get_vote_counts.cdc \
-  --arg UInt64:1 \
-  --network testnet
+### Scripts (Read Operations)
+
+#### Get All Active Proposals
+```cadence
+getActiveProposals(): [Proposal]
 ```
 
-**Get total proposals:**
-```bash
-flow scripts execute cadence/scripts/get_total_proposals.cdc --network testnet
+#### Get Proposal by ID
+```cadence
+getProposal(proposalId: UInt64): Proposal?
 ```
 
-### Send Transactions
-
-**Create a proposal:**
-```bash
-flow transactions send cadence/transactions/create_proposal.cdc \
-  --arg String:"Central Park" \
-  --arg String:"park_001" \
-  --arg String:"Protect Central Park from commercial development" \
-  --arg UFix64:1735689600.0 \
-  --arg UFix64:0.75 \
-  --arg UFix64:0.45 \
-  --arg UFix64:25.5 \
-  --arg UFix64:45.8 \
-  --arg UFix64:79.6 \
-  --arg UFix64:40.0 \
-  --arg UInt64:1500 \
-  --arg UInt64:3500 \
-  --arg UInt64:800 \
-  --arg UInt64:5800 \
-  --arg Address:0xYourAddress \
-  --network testnet \
-  --signer parkpulse
-```
-
-**Vote on a proposal:**
-```bash
-flow transactions send cadence/transactions/vote.cdc \
-  --arg UInt64:1 \
-  --arg Bool:true \
-  --arg Address:0xYourAddress \
-  --network testnet \
-  --signer parkpulse
-```
-
-### Development with Emulator
-
-Start local Flow emulator:
-```bash
-# Terminal 1: Start emulator
-flow emulator start
-
-# Terminal 2: Deploy and test
-flow project deploy --network emulator
-flow scripts execute cadence/scripts/get_total_proposals.cdc --network emulator
-```
-
-Update `.env` for emulator:
-```bash
-FLOW_NETWORK=emulator
-FLOW_ACCESS_NODE=localhost:3569
+#### Get Vote Counts
+```cadence
+getVoteCounts(proposalId: UInt64): {String: UInt64}
 ```
 
 ---
 
-## Project Structure
+## Contributing
 
-```
-parkpulsebe/
-├── cadence/                      # Flow Cadence smart contracts
-│   ├── contracts/                # Contract definitions
-│   │   └── CommunityVoting.cdc  # Main voting contract
-│   ├── transactions/             # Write operations
-│   │   ├── create_proposal.cdc
-│   │   └── vote.cdc
-│   ├── scripts/                  # Read operations
-│   │   ├── get_proposal.cdc
-│   │   ├── get_all_active_proposals.cdc
-│   │   ├── get_vote_counts.cdc
-│   │   └── get_total_proposals.cdc
-│   └── tests/                    # Test files
-│
-├── flow.json                     # Flow configuration
-├── .env                          # Environment variables (gitignored)
-├── .env.example                  # Environment template
-│
-├── main.py                       # FastAPI backend
-├── blockchain.py                 # Flow blockchain service
-├── deploy_flow_contract.py       # Deployment script
-├── setup_flow_wallet.py          # Wallet setup helper
-├── database.py                   # Database operations
-├── models.py                     # Data models
-├── utils.py                      # Utilities
-├── agent.py                      # AI agent
-│
-└── requirements.txt              # Python dependencies
-```
+We welcome contributions to ParkPulse.ai! Here's how you can help:
 
----
+### Areas for Contribution
+- Frontend UI/UX improvements
+- Additional Cadence smart contract features
+- Environmental analysis enhancements
+- Documentation improvements
+- Bug fixes and testing
 
-## Troubleshooting
+### Development Process
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Test thoroughly (testnet deployment)
+5. Commit with clear messages
+6. Push to your fork
+7. Open a Pull Request
 
-### "Insufficient balance" Error
-
-**Solution:** Get testnet FLOW tokens from the faucet:
+### Testing
 ```bash
-# Check balance
-flow accounts get 0xYourAddress --network testnet
-```
-Visit: https://testnet-faucet.onflow.org/
-
-### "Flow connection failed"
-
-**Solution:** Verify network configuration:
-```bash
-# Test connection
-flow blocks get latest --network testnet
-
-# Check access node in .env
-FLOW_ACCESS_NODE=access.devnet.nodes.onflow.org:9000
-```
-
-### "Contract not found"
-
-**Solution:** Verify contract is deployed:
-```bash
-flow accounts get 0xYourAddress --network testnet
-```
-Look for `CommunityVoting` in the contracts section.
-
-### "Account not found"
-
-**Solution:** Check your Flow address:
-```bash
-flow accounts list
-```
-Verify `FLOW_ADDRESS` in `.env` matches.
-
-### "Invalid private key"
-
-**Solution:**
-- Ensure private key is hex format (64 characters)
-- Remove `0x` prefix if present
-- Verify key matches your account address
-
-### Database Connection Error
-
-**Solution:**
-```bash
-# Verify PostgreSQL is running
-psql -U your_username -d cityroots
-
-# Check .env database credentials
-PGHOST=localhost
-PGDATABASE=cityroots
-PGUSER=your_username
-PGPASSWORD=your_password
-```
-
-### Import Errors
-
-**Solution:**
-```bash
-# Reinstall dependencies
-pip install --upgrade -r requirements.txt
-```
-
-### Port Already in Use
-
-**Solution:**
-```bash
-# Find process using port 4000
-lsof -i :4000
-
-# Kill the process
-kill -9 <PID>
-
-# Or change port in .env
-PORT=8000
-```
-
----
-
-## Network Information
-
-### Testnet (Default)
-- **Access Node:** `access.devnet.nodes.onflow.org:9000`
-- **Explorer:** https://testnet.flowdiver.io
-- **Faucet:** https://testnet-faucet.onflow.org
-- **Use Case:** Testing with free FLOW tokens
-
-### Mainnet (Production)
-- **Access Node:** `access.mainnet.nodes.onflow.org:9000`
-- **Explorer:** https://flowdiver.io
-- **Use Case:** Production deployment (costs real FLOW)
-
-### Emulator (Local)
-- **Access Node:** `localhost:3569`
-- **Use Case:** Local development without internet
-
----
-
-## Useful Commands
-
-### Flow CLI
-
-```bash
-# Project info
-flow project info
-
-# List accounts
-flow accounts list
-
-# Get account details
-flow accounts get 0xYourAddress --network testnet
-
-# Lint Cadence code
-flow cadence lint cadence/contracts/CommunityVoting.cdc
-
-# Get latest block
-flow blocks get latest --network testnet
-```
-
-### Backend
-
-```bash
-# Start backend
-python main.py
-
-# Start with custom port
-PORT=8000 python main.py
-
-# Run in background
-nohup python main.py > backend.log 2>&1 &
-```
-
-### Development
-
-```bash
-# Install dev dependencies
-pip install -r requirements.txt
-
-# Run tests
+# Backend tests
+cd parkpulsebe
 pytest
 
-# Check code style
-flake8 *.py
+# Frontend tests
+cd parkpulsefe
+npm test
+
+# Flow contract tests
+flow test parkpulsebe/cadence/tests/
 ```
 
 ---
 
-## Resources
+## Roadmap
 
-- **Flow Documentation:** https://developers.flow.com/
-- **Cadence Language:** https://cadence-lang.org/
-- **Flow Python SDK:** https://github.com/janezpodhostnik/flow-py-sdk
-- **Flow Discord:** https://discord.gg/flow
-- **Testnet Faucet:** https://testnet-faucet.onflow.org/
-- **Flow Status:** https://status.onflow.org/
+### Phase 1: MVP (Current)
+- [x] Flow testnet deployment
+- [x] Basic voting functionality
+- [x] Environmental impact analysis
+- [x] Web interface
+
+### Phase 2: Enhanced Features
+- [ ] Mobile app (iOS/Android)
+- [ ] Multi-language support
+- [ ] Advanced AI predictions
+- [ ] Integration with city APIs
+
+### Phase 3: Mainnet & Scale
+- [ ] Flow mainnet deployment
+- [ ] Multi-city expansion
+- [ ] DAO governance features
+- [ ] Token rewards for participation
+
+### Phase 4: Ecosystem
+- [ ] Partner with environmental NGOs
+- [ ] Government integration
+- [ ] Open data platform
+- [ ] Research partnerships
 
 ---
 
-## Support
+## Security
 
-For issues or questions:
+### Auditing
+- Smart contract code is open-source for community review
+- Currently deployed on testnet for testing
+- Will undergo professional audit before mainnet deployment
 
-1. Check this README's troubleshooting section
-2. Review Flow documentation
-3. Ask in Flow Discord community
-4. Check Flow status page for network issues
+### Reporting Vulnerabilities
+If you discover a security issue, please email: security@parkpulse.ai
 
----
-
-## Security Notes
-
-⚠️ **Important:**
-- Never commit `.env` file to version control
-- Keep private keys secure
+### Best Practices
+- Never commit private keys
 - Use environment variables for sensitive data
 - Test thoroughly on testnet before mainnet
 - Validate all user inputs
@@ -597,10 +495,10 @@ For issues or questions:
 
 ## License
 
-This project is part of ParkPulse.ai. See LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**You're ready to go!** 🚀
+Made with ❤️ for parks, communities, and the environment.
 
-Run `python setup_flow_wallet.py` to get started.
+**#BuildOnFlow #FlowBlockchain #Web3ForGood**
